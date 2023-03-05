@@ -4,37 +4,33 @@
 // 정직원은 시간당 10000원
 // 파트타임 직원은 시간당 8000원
 
-class employee {
-  constructor(name, timeType, monthTime) {
-  this.name;
-  this.timeType;
-  this.monthTime;
-  }
-  
-
-  
-  fullTime= (fTime) => {
-    fullMonthTime = fTime * 10000
-    
+class Employee {
+  constructor(name, department, hoursPerMonth, payRate) {
+    this.name = name;
+    this.department = department;
+    this.hoursPerMonth = hoursPerMonth;
+    this.payRate = payRate;
   }
 
-  partTime = (pTime) => {
-    partMonthTime = pTime * 8000
+  calculatePay() {
+    return this.hoursPerMonth * this.payRate;
   }
 }
 
-class FullTimeEmployee extends employee {
-  name = James;
-  timeType = fullTime(60);
-  
-  
+class FullTimeEmployee extends Employee {
+  static PAY_RATE = 10000;
+  constructor(name, department, hoursPerMonth) {
+    super(name, department, hoursPerMonth, FullTimeEmployee.PAY_RATE);
+  }
+}
+class PartTimeEmployee extends Employee {
+  static PAY_RATE = 8000;
+  constructor(name, department, hoursPerMonth) {
+    super(name, department, hoursPerMonth, PartTimeEmployee.PAY_RATE);
+  }
 }
 
-class PartTimeEmployee extends employee {
-  name = Jin;
-  timeType = partTime(40);
-  
-}
-
-const fullTime = fullPay();
-const partTime = partPay();
+const hyeonmin = new FullTimeEmployee('현민', 's/w', 30);
+const juhyeon = new PartTimeEmployee('주현', 's/w', 20);
+console.log(hyeonmin.calculatePay());
+console.log(juhyeon.calculatePay());
